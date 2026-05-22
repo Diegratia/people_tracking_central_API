@@ -11,7 +11,6 @@ namespace CentralMonitoring.Application.DTOs
         public string BaseUrl { get; set; } = string.Empty;
         public string OverallStatus { get; set; } = "Offline";
         public List<MonitoringConfigDto> MonitoringConfigs { get; set; } = new();
-        public List<BuildingDto> Buildings { get; set; } = new();
         public string? ErrorMessage { get; set; }
     }
 }

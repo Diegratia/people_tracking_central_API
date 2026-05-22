@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CentralMonitoring.Domain.Entities;
 
 namespace CentralMonitoring.Application.DTOs
 {
@@ -11,7 +10,7 @@ namespace CentralMonitoring.Application.DTOs
         public string Description { get; set; } = string.Empty;
         public string BaseUrl { get; set; } = string.Empty;
         public string OverallStatus { get; set; } = "Offline";
-        public List<FloorplanDevice> FloorplanDevices { get; set; } = new();
+        public List<FloorplanDeviceDto> FloorplanDevices { get; set; } = new();
         public string? ErrorMessage { get; set; }
     }
 }

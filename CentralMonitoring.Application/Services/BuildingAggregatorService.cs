@@ -212,7 +212,25 @@ namespace CentralMonitoring.Application.Services
                 try
                 {
                     var devices = await _siteClient.GetFloorplanDevicesAsync(s.BaseUrl, s.ApiKey, cancellationToken);
-                    dto.FloorplanDevices = devices.ToList();
+                    dto.FloorplanDevices = devices.Select(d => new FloorplanDeviceDto
+                    {
+                        Id = d.Id,
+                        ApplicationId = d.ApplicationId,
+                        Name = d.Name,
+                        Type = d.Type,
+                        DeviceStatus = d.DeviceStatus,
+                        PosX = d.PosX,
+                        PosY = d.PosY,
+                        PosPxX = d.PosPxX,
+                        PosPxY = d.PosPxY,
+                        ReaderId = d.ReaderId,
+                        FloorplanId = d.FloorplanId,
+                        AreaId = d.FloorplanMaskedAreaId,
+                        Path = d.Path,
+                        Floorplan = d.Floorplan,
+                        Reader = d.Reader,
+                        Area = d.FloorplanMaskedArea
+                    }).ToList();
                     dto.OverallStatus = "Online";
                 }
                 catch (Exception ex)

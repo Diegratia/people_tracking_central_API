@@ -12,8 +12,8 @@ namespace CentralMonitoring.Domain.Entities
         public float? PosPxX { get; set; }
         public float? PosPxY { get; set; }
         public Guid? ReaderId { get; set; }
-        public Guid? AccessCctvId { get; set; }
-        public Guid? AccessControlId { get; set; }
+        // public Guid? AccessCctvId { get; set; }
+        // public Guid? AccessControlId { get; set; }
         public Guid FloorplanId { get; set; }
         public Guid? FloorplanMaskedAreaId { get; set; }
         public string? Path { get; set; }

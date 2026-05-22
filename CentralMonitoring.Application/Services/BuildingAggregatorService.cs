@@ -194,5 +194,37 @@ namespace CentralMonitoring.Application.Services
 
             return await Task.WhenAll(tasks);
         }
+
+        public async Task<IEnumerable<SiteFloorplanDevicesDto>> GetFlatFloorplanDevicesAsync(
+            IEnumerable<Site> sites,
+            CancellationToken cancellationToken = default)
+        {
+            var tasks = sites.Select(async s =>
+            {
+                var dto = new SiteFloorplanDevicesDto
+                {
+                    SiteId = s.Id,
+                    SiteName = s.Name,
+                    Description = s.Description,
+                    BaseUrl = s.BaseUrl
+                };
+
+                try
+                {
+                    var devices = await _siteClient.GetFloorplanDevicesAsync(s.BaseUrl, s.ApiKey, cancellationToken);
+                    dto.FloorplanDevices = devices.ToList();
+                    dto.OverallStatus = "Online";
+                }
+                catch (Exception ex)
+                {
+                    dto.OverallStatus = "Offline";
+                    dto.ErrorMessage = ex.Message;
+                }
+
+                return dto;
+            });
+
+            return await Task.WhenAll(tasks);
+        }
     }
 }

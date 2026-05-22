@@ -12,5 +12,6 @@ namespace CentralMonitoring.Application.Common.Interfaces
         Task<IEnumerable<Floor>> GetFloorsAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default);
         Task<IEnumerable<Floorplan>> GetFloorplansAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default);
         Task<IEnumerable<MaskedArea>> GetMaskedAreasAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default);
+        Task<IEnumerable<FloorplanDevice>> GetFloorplanDevicesAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default);
     }
 }

@@ -120,6 +120,26 @@ namespace CentralMonitoring.Infrastructure.Services
             return wrapper?.Collection?.Data ?? new List<MaskedArea>();
         }
 
+        public async Task<IEnumerable<FloorplanDevice>> GetFloorplanDevicesAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
+        {
+            var cleanUrl = baseUrl.TrimEnd('/') + "/api/FloorplanDevice/central";
+            var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
+            
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                request.Headers.Add(ApiKeyHeaderName, apiKey);
+            }
+
+            var response = await _httpClient.SendAsync(request, cancellationToken);
+            response.EnsureSuccessStatusCode();
+
+            var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<FloorplanDevice>>>(
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }, 
+                cancellationToken);
+
+            return wrapper?.Collection?.Data ?? new List<FloorplanDevice>();
+        }
+
 
         private class ApiResponseWrapper<T>
         {

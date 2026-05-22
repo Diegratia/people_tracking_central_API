@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  central-monitoring-api:
+    image: central-monitoring-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: central_monitoring_api
+    ports:
+      - "5200:5200"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    restart: always

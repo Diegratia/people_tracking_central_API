@@ -10,6 +10,7 @@ namespace CentralMonitoring.Domain.Entities
     {
         [JsonPropertyOrder(-10)]
         public Guid Id { get; set; }
+        [JsonIgnore]
         public Guid? ApplicationId { get; set; }
     }
 }

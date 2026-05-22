@@ -12,6 +12,5 @@ namespace CentralMonitoring.Domain.Entities
         public string? RestrictedStatus { get; set; }
         public bool? AllowFloorChange { get; set; }
         public bool? IsAssemblyPoint { get; set; }
-        public int? Status { get; set; }
     }
 }

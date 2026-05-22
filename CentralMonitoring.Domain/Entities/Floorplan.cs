@@ -12,6 +12,5 @@ namespace CentralMonitoring.Domain.Entities
         public float FloorX { get; set; }
         public float FloorY { get; set; }
         public float MeterPerPx { get; set; }
-        public int Status { get; set; }
     }
 }

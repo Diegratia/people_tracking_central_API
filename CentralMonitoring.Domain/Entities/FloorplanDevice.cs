@@ -20,8 +20,8 @@ namespace CentralMonitoring.Domain.Entities
 
         public MinimalFloorplan? Floorplan { get; set; }
         public MinimalBleReader? Reader { get; set; }
-        public MinimalAccessCctv? AccessCctv { get; set; }
-        public MinimalAccessControl? AccessControl { get; set; }
+        // public MinimalAccessCctv? AccessCctv { get; set; }
+        // public MinimalAccessControl? AccessControl { get; set; }
         public MinimalMaskedArea? FloorplanMaskedArea { get; set; }
     }
 
@@ -44,21 +44,21 @@ namespace CentralMonitoring.Domain.Entities
         public Guid BrandId { get; set; }
     }
 
-    public class MinimalAccessCctv
-    {
-        public Guid Id { get; set; }
-        public string? Name { get; set; }
-        public string? Rtsp { get; set; }
-        public Guid? IntegrationId { get; set; }
-    }
+    // public class MinimalAccessCctv
+    // {
+    //     public Guid Id { get; set; }
+    //     public string? Name { get; set; }
+    //     public string? Rtsp { get; set; }
+    //     public Guid? IntegrationId { get; set; }
+    // }
 
-    public class MinimalAccessControl
-    {
-        public Guid Id { get; set; }
-        public string? Name { get; set; }
-        public Guid? BrandId { get; set; }
-        public string? Channel { get; set; }
-    }
+    // public class MinimalAccessControl
+    // {
+    //     public Guid Id { get; set; }
+    //     public string? Name { get; set; }
+    //     public Guid? BrandId { get; set; }
+    //     public string? Channel { get; set; }
+    // }
 
     public class MinimalMaskedArea
     {

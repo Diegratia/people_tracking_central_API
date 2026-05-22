@@ -21,8 +21,8 @@ namespace CentralMonitoring.Application.DTOs
 
         public MinimalFloorplan? Floorplan { get; set; }
         public MinimalBleReader? Reader { get; set; }
-        public MinimalAccessCctv? AccessCctv { get; set; }
-        public MinimalAccessControl? AccessControl { get; set; }
+        // public MinimalAccessCctv? AccessCctv { get; set; }
+        // public MinimalAccessControl? AccessControl { get; set; }
         public MinimalMaskedArea? FloorplanMaskedArea { get; set; }
     }
 }

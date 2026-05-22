@@ -53,7 +53,6 @@ namespace CentralMonitoring.Application.Services
                         buildingDtos.Add(bDto);
                     }
 
-                    dto.Buildings = buildingDtos;
                     dto.OverallStatus = "Online";
                 }
                 catch (Exception ex)

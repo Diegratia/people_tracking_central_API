@@ -11,4 +11,6 @@ services:
       - "0.0.0.0:5200:5200"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always

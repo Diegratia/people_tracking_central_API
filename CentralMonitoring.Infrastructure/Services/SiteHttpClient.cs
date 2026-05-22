@@ -12,17 +12,16 @@ namespace CentralMonitoring.Infrastructure.Services
 {
     public class SiteHttpClient : ISiteClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _httpClient;
         private const string ApiKeyHeaderName = "X-BIOPEOPLETRACKING-API-KEY";
 
-        public SiteHttpClient(IHttpClientFactory httpClientFactory)
+        public SiteHttpClient(HttpClient httpClient)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<MonitoringConfigInfo>> GetMonitoringConfigsAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
         {
-            var client = _httpClientFactory.CreateClient();
             var cleanUrl = baseUrl.TrimEnd('/') + "/api/MonitoringConfig/open";
             var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
             
@@ -31,7 +30,7 @@ namespace CentralMonitoring.Infrastructure.Services
                 request.Headers.Add(ApiKeyHeaderName, apiKey);
             }
 
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<MonitoringConfigInfo>>>(
@@ -43,7 +42,6 @@ namespace CentralMonitoring.Infrastructure.Services
 
         public async Task<IEnumerable<Building>> GetBuildingsAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
         {
-            var client = _httpClientFactory.CreateClient();
             var cleanUrl = baseUrl.TrimEnd('/') + "/api/MstBuilding/open/central";
             var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
             
@@ -52,7 +50,7 @@ namespace CentralMonitoring.Infrastructure.Services
                 request.Headers.Add(ApiKeyHeaderName, apiKey);
             }
 
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<Building>>>(
@@ -64,7 +62,6 @@ namespace CentralMonitoring.Infrastructure.Services
 
         public async Task<IEnumerable<Floor>> GetFloorsAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
         {
-            var client = _httpClientFactory.CreateClient();
             var cleanUrl = baseUrl.TrimEnd('/') + "/api/MstFloor/open";
             var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
             
@@ -73,7 +70,7 @@ namespace CentralMonitoring.Infrastructure.Services
                 request.Headers.Add(ApiKeyHeaderName, apiKey);
             }
 
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<Floor>>>(
@@ -85,7 +82,6 @@ namespace CentralMonitoring.Infrastructure.Services
 
         public async Task<IEnumerable<Floorplan>> GetFloorplansAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
         {
-            var client = _httpClientFactory.CreateClient();
             var cleanUrl = baseUrl.TrimEnd('/') + "/api/MstFloorplan/open";
             var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
             
@@ -94,7 +90,7 @@ namespace CentralMonitoring.Infrastructure.Services
                 request.Headers.Add(ApiKeyHeaderName, apiKey);
             }
 
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<Floorplan>>>(
@@ -106,7 +102,6 @@ namespace CentralMonitoring.Infrastructure.Services
 
         public async Task<IEnumerable<MaskedArea>> GetMaskedAreasAsync(string baseUrl, string? apiKey = null, CancellationToken cancellationToken = default)
         {
-            var client = _httpClientFactory.CreateClient();
             var cleanUrl = baseUrl.TrimEnd('/') + "/api/FloorplanMaskedArea/central";
             var request = new HttpRequestMessage(HttpMethod.Get, cleanUrl);
             
@@ -115,7 +110,7 @@ namespace CentralMonitoring.Infrastructure.Services
                 request.Headers.Add(ApiKeyHeaderName, apiKey);
             }
 
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<MaskedArea>>>(

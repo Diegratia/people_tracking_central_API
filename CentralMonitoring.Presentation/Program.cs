@@ -7,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-builder.Services.AddHttpClient();
-builder.Services.AddScoped<ISiteClient, SiteHttpClient>();
+builder.Services.AddHttpClient<ISiteClient, SiteHttpClient>(client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(20);
+});
 builder.Services.AddScoped<BuildingAggregatorService>();
 builder.Services.AddScoped<MonitoringAggregatorService>();
 

@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # Configure port binding (binds to port 5200 inside container)
+ENV ASPNETCORE_URLS=http://0.0.0.0:5200
 EXPOSE 5200
 
 ENTRYPOINT ["dotnet", "CentralMonitoring.Presentation.dll"]
-

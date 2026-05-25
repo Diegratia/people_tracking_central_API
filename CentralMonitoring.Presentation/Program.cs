@@ -13,6 +13,7 @@ builder.Services.AddHttpClient<ISiteClient, SiteHttpClient>(client =>
 });
 builder.Services.AddScoped<BuildingAggregatorService>();
 builder.Services.AddScoped<MonitoringAggregatorService>();
+builder.Services.AddScoped<AnalyticsAggregatorService>();
 
 builder.Services.AddCors(options =>
 {

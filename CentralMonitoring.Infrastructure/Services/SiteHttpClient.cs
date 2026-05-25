@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using CentralMonitoring.Application.Common.Interfaces;
+using CentralMonitoring.Application.DTOs;
 using CentralMonitoring.Domain.Entities;
 
 namespace CentralMonitoring.Infrastructure.Services
@@ -140,6 +141,34 @@ namespace CentralMonitoring.Infrastructure.Services
             return wrapper?.Collection?.Data ?? new List<FloorplanDevice>();
         }
 
+        public async Task<IEnumerable<LatestPosition>> GetLatestPositionsAsync(
+            string baseUrl,
+            TrackingAnalyticsFilter filter,
+            string? apiKey = null,
+            CancellationToken cancellationToken = default)
+        {
+            var cleanUrl = baseUrl.TrimEnd('/') + "/api/TrackingAnalytics/central/latest-position";
+            var request = new HttpRequestMessage(HttpMethod.Post, cleanUrl);
+
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                request.Headers.Add(ApiKeyHeaderName, apiKey);
+            }
+
+            request.Content = JsonContent.Create(filter);
+
+            var response = await _httpClient.SendAsync(request, cancellationToken);
+            response.EnsureSuccessStatusCode();
+
+            var wrapper = await response.Content.ReadFromJsonAsync<ApiResponseWrapper<List<LatestPosition>>>(
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                },
+                cancellationToken);
+
+            return wrapper?.Collection?.Data ?? new List<LatestPosition>();
+        }
 
         private class ApiResponseWrapper<T>
         {
